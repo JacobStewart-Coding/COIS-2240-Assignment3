@@ -58,4 +58,18 @@ public class Transaction {
             System.out.println("An error occurred while writing to the file.");
         }
     }
+    public void displayTransactionHistory() {
+        try {
+            File file = new File("transactions.txt");
+            Scanner scanner = new Scanner(file);
+            System.out.println("\nTransaction History:");
+            System.out.println("---------------------");
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No transaction history found.");
+        }
+    }
 }
