@@ -3,8 +3,22 @@ import java.util.Date;
 
 public class Transaction {
 
-    // Perform the borrowing of a book
-    public static boolean borrowBook(Book book, Member member) {
+	
+	private static Transaction instance = null;
+	
+	//private so only this class can make a new Transaction directly
+	private Transaction() {}
+	
+	public static synchronized Transaction getTransaction() {
+        if (instance == null) {
+            instance = new Transaction();
+        }
+        return instance;
+	}
+	
+    // Perform the borrowing of a book 
+	// removed static
+    public boolean borrowBook(Book book, Member member) {
         if (book.isAvailable()) {
             book.borrowBook();
             member.borrowBook(book); 
@@ -18,7 +32,8 @@ public class Transaction {
     }
 
     // Perform the returning of a book
-    public static void returnBook(Book book, Member member) {
+    // removed static
+    public void returnBook(Book book, Member member) {
         if (member.getBorrowedBooks().contains(book)) {
             member.returnBook(book);
             book.returnBook();
