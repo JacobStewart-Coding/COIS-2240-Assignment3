@@ -49,11 +49,15 @@ public class LibraryManagement {
                     String title = scanner.next();
                     scanner.nextLine();
 
-                    Book newBook = new Book(id, title);
-                    if (library.addBook(newBook)) {
-                        System.out.println("Book added to library successfully.");
-                    } else {
-                        System.out.println("Failed to add book. ID already exists.");
+                    try {
+                        Book newBook = new Book(id, title);
+                        if (library.addBook(newBook)) {
+                            System.out.println("Book added to library successfully.");
+                        } else {
+                            System.out.println("Failed to add book. ID already exists.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                     break;
                 case 3:
