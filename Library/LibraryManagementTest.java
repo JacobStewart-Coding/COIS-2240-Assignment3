@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 
 public class LibraryManagementTest {
 
@@ -80,5 +82,16 @@ public class LibraryManagementTest {
         transaction.borrowBook(book, member);
         transaction.returnBook(book, member);
         assertFalse(transaction.returnBook(book, member));
+    }
+    
+    @Test
+    public void testSingletonTransaction() {
+        try {
+            Constructor<Transaction> constructor = Transaction.class.getDeclaredConstructor();
+            int modifiers = constructor.getModifiers();
+            assertTrue(Modifier.isPrivate(modifiers));
+        } catch (NoSuchMethodException e) {
+            fail("Transaction class should have a constructor, even if it's private.");
+        }
     }
 }
