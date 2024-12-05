@@ -31,18 +31,19 @@ public class Transaction {
 
     // Perform the returning of a book
     // removed static
-    public void returnBook(Book book, Member member) {
+    public boolean returnBook(Book book, Member member) {
         if (member.getBorrowedBooks().contains(book)) {
             member.returnBook(book);
             book.returnBook();
             String transactionDetails = getCurrentDateTime() + " - Returning: " + member.getName() + " returned " + book.getTitle();
             System.out.println(transactionDetails);
             saveTransaction(transactionDetails);
+            return true;
         } else {
             System.out.println("This book was not borrowed by the member.");
+            return false;
         }
     }
-
     // Get the current date and time in a readable format
     private static String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
