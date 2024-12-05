@@ -44,13 +44,13 @@ public class LibraryManagement {
             		break;
                 case 2:
                 	System.out.print("Enter book ID: ");
-                    id = scanner.nextInt();
+                    int id1 = scanner.nextInt();
                     System.out.print("Enter book title: ");
                     String title = scanner.next();
                     scanner.nextLine();
 
                     try {
-                        Book newBook = new Book(id, title);
+                        Book newBook = new Book(id1, title);
                         if (library.addBook(newBook)) {
                             System.out.println("Book added to library successfully.");
                         } else {
